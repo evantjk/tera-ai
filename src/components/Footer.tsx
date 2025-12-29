@@ -15,10 +15,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-heading text-off-white-bone mb-4">Contact</h4>
             <p className="text-base text-off-white-bone/70 mb-2">
-              charles@hellotera.ai
+              evan@hellotera.ai
             </p>
             <p className="text-base text-off-white-bone/70 mb-2">
-              +60 13-733 6001
+              +60 12345678
             </p>
             <p className="text-base text-off-white-bone/70">
               Petaling Jaya, Selangor
