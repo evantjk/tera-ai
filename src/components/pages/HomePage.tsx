@@ -1,4 +1,4 @@
-// HPI 1.9-V (Refined Content)
+// HPI 2.0-V (Final Polish)
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Header from '@/components/Header';
@@ -169,7 +169,8 @@ export default function HomePage() {
       _id: '3', 
       partnerName: 'Wise', 
       partnerDescription: 'Payment Integration',
-      partnerLogo: 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Wise_Logo.svg'
+      // UPDATED: Using Official Wise CDN for stability
+      partnerLogo: 'https://wise.com/public-resources/assets/logos/wise/brand_logo.svg'
     },
     { 
       _id: '4', 
@@ -231,7 +232,6 @@ export default function HomePage() {
     }
   ];
 
-  // --- Scroll Effects ---
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -281,6 +281,7 @@ export default function HomePage() {
               </AnimatedElement>
 
               <AnimatedElement delay={400}>
+                {/* UPDATED TITLE */}
                 <h1 className="text-9xl md:text-[10rem] lg:text-[13rem] leading-[0.85] font-heading font-black tracking-tighter text-off-white-bone mix-blend-lighten">
                   TERA
                 </h1>
@@ -292,21 +293,21 @@ export default function HomePage() {
                 </p>
               </AnimatedElement>
 
-              {/* UPDATED AI MODEL DISPLAY */}
+              {/* UPDATED AI MODEL HIGHLIGHTS */}
               <AnimatedElement delay={700}>
                 <div className="flex flex-wrap justify-center items-center gap-6 mt-4">
-                  <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-off-white-bone/5 border border-off-white-bone/10 backdrop-blur-sm hover:border-muted-terracotta/50 transition-colors group">
-                    <Sparkles className="w-5 h-5 text-muted-terracotta group-hover:scale-110 transition-transform" />
-                    <span className="text-lg font-mono text-off-white-bone font-bold tracking-wide">
+                  <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-off-white-bone/5 border border-off-white-bone/10 backdrop-blur-sm hover:border-muted-terracotta/50 hover:bg-muted-terracotta/10 transition-all duration-300 group shadow-lg shadow-black/20">
+                    <Sparkles className="w-6 h-6 text-muted-terracotta group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300" />
+                    <span className="text-xl font-mono text-off-white-bone font-bold tracking-wide">
                       v2.5 GEMINI
                     </span>
                   </div>
                   
-                  <div className="h-px w-8 bg-off-white-bone/20 md:h-8 md:w-px" />
+                  <div className="hidden md:block h-px w-8 bg-off-white-bone/20" />
 
-                  <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-off-white-bone/5 border border-off-white-bone/10 backdrop-blur-sm hover:border-muted-terracotta/50 transition-colors group">
-                    <Bot className="w-5 h-5 text-muted-terracotta group-hover:scale-110 transition-transform" />
-                    <span className="text-lg font-mono text-off-white-bone font-bold tracking-wide">
+                  <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-off-white-bone/5 border border-off-white-bone/10 backdrop-blur-sm hover:border-muted-terracotta/50 hover:bg-muted-terracotta/10 transition-all duration-300 group shadow-lg shadow-black/20">
+                    <Bot className="w-6 h-6 text-muted-terracotta group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300" />
+                    <span className="text-xl font-mono text-off-white-bone font-bold tracking-wide">
                       v5.0 CHATGPT
                     </span>
                   </div>
@@ -316,7 +317,7 @@ export default function HomePage() {
               <AnimatedElement delay={800} className="mt-8">
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="group relative px-10 py-5 bg-off-white-bone text-deep-matte-charcoal font-bold tracking-wide overflow-hidden rounded-sm"
+                  className="group relative px-10 py-5 bg-off-white-bone text-deep-matte-charcoal font-bold tracking-wide overflow-hidden rounded-sm hover:shadow-[0_0_20px_rgba(227,227,227,0.3)] transition-shadow duration-300"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     INITIATE SEQUENCE <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -363,16 +364,16 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* --- SERVICES SECTION (Redesigned - No Sidebar) --- */}
+        {/* --- SERVICES SECTION (Centered Layout) --- */}
         <section id="services" className="relative py-32 bg-deep-matte-charcoal">
           <div className="max-w-[120rem] mx-auto px-6 md:px-12">
-            
-            {/* Centered layout for cards since sidebar text was removed */}
+            {/* Centered container for cards */}
             <div className="max-w-6xl mx-auto flex flex-col gap-24">
               {services.map((service, index) => (
                 <AnimatedElement key={service._id} delay={index * 100} className="group">
                   <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-off-white-bone/10 bg-off-white-bone/5 p-8 md:p-12 rounded-sm hover:border-muted-terracotta/50 transition-colors duration-500">
                     
+                    {/* Decorative Corner Borders */}
                     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
                     <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
                     <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
