@@ -1,4 +1,4 @@
-// HPI 1.7-V (Final Fix)
+// HPI 1.8-V (Visual Update)
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Header from '@/components/Header';
@@ -123,7 +123,7 @@ const ParallaxImage = ({ src, alt, className }: { src: string, alt: string, clas
 
 export default function HomePage() {
   
-  // --- 1. HARDCODED SERVICES DATA ---
+  // --- 1. HARDCODED SERVICES DATA (With Official Images) ---
   const services: CoreService[] = [
     {
       _id: '1',
@@ -131,7 +131,7 @@ export default function HomePage() {
       description: 'Revolutionizes the way you schedule appointments. TERA negotiates times and syncs directly to your calendar for unmatched efficiency.',
       integrationPartner: 'Google Calendar',
       tagline: 'Time Reclaimed',
-      serviceImage: 'https://static.wixstatic.com/media/c837a6_7306385d944c4e74823cc19dfa9f77f5~mv2.jpg' 
+      serviceImage: 'https://static.wixstatic.com/media/362827_c666923c320d4ea1b03ba73bc2bca802~mv2.png' // Official Google Calendar graphic
     },
     {
       _id: '2',
@@ -139,7 +139,7 @@ export default function HomePage() {
       description: 'Handle payments and financial transactions directly within the chat interface. Secure, borderless, and instant.',
       integrationPartner: 'Wise',
       tagline: 'Borderless Economy',
-      serviceImage: 'https://static.wixstatic.com/media/c837a6_1482f34237d64344933979858567119e~mv2.jpg' 
+      serviceImage: 'https://static.wixstatic.com/media/362827_e4abddc80ceb4cc4988388fbd84bf831~mv2.png' // Official Wise graphic
     },
     {
       _id: '3',
@@ -147,7 +147,7 @@ export default function HomePage() {
       description: 'Make service bookings and navigate logistics without leaving WhatsApp. The "Do-It-All" assistant for your daily needs.',
       integrationPartner: 'Google Maps',
       tagline: 'Logistics Solved',
-      serviceImage: 'https://static.wixstatic.com/media/c837a6_3b680c65651c416187974447037f5979~mv2.jpg' 
+      serviceImage: 'https://static.wixstatic.com/media/362827_d090ed83cbd44596b6abc29fcff14d86~mv2.png' // Official Google Maps graphic
     }
   ];
 
@@ -348,7 +348,6 @@ export default function HomePage() {
               {partners.map((partner) => (
                 <div key={partner._id} className="group relative flex flex-col items-center justify-center">
                   <div className="h-10 md:h-14 w-auto relative grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
-                    {/* The filters here (brightness-0 invert) make the logos white by default for Dark Mode */}
                     <Image 
                       src={partner.partnerLogo || ''} 
                       alt={partner.partnerName} 
@@ -439,7 +438,7 @@ export default function HomePage() {
                           <Image 
                             src={service.serviceImage}
                             alt={service.serviceName || 'Service visualization'}
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
+                            className="w-full h-full object-contain bg-black/50 grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
                             width={600}
                           />
                         ) : (
@@ -457,7 +456,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* --- TIMELINE SECTION --- */}
+        {/* --- TIMELINE SECTION (Header Updated) --- */}
         <section id="timeline" className="py-32 bg-deep-matte-charcoal relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03]" 
                style={{ backgroundImage: 'linear-gradient(#E3E3E3 1px, transparent 1px), linear-gradient(90deg, #E3E3E3 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
@@ -465,7 +464,8 @@ export default function HomePage() {
 
           <div className="max-w-[80rem] mx-auto px-6 relative z-10">
             <AnimatedElement className="text-center mb-24">
-              <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6"><span className="text-muted-terracotta">TERA</span></h2>
+              {/* UPDATED HEADER HERE */}
+              <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6">Development <span className="text-muted-terracotta">Log</span></h2>
               <p className="text-off-white-bone/60 max-w-2xl mx-auto">Tracing the evolution of the TERA engine from concept to reality.</p>
             </AnimatedElement>
 
@@ -510,27 +510,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* --- VISUAL BREATHER --- */}
-        <section className="relative h-[70vh] w-full overflow-hidden flex items-center justify-center">
-          <div className="absolute inset-0">
-            <ParallaxImage 
-              src="https://static.wixstatic.com/media/190b6f_5d1e218d04b94e93af5a698124d83292~mv2.png?originWidth=1152&originHeight=832"
-              alt="Abstract network visualization"
-              className="w-full h-full opacity-30"
-            />
-            <div className="absolute inset-0 bg-deep-matte-charcoal/60 mix-blend-multiply" />
-          </div>
-          
-          <div className="relative z-10 text-center px-6">
-            <AnimatedElement>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8 max-w-4xl mx-auto leading-tight">
-                "The future isn't about replacing humans. <br/> It's about <span className="text-muted-terracotta italic">amplifying</span> them."
-              </h2>
-            </AnimatedElement>
-          </div>
-        </section>
-
-        {/* --- CONTACT SECTION --- */}
+        {/* --- CONTACT SECTION (Removed Visual Breather) --- */}
         <section id="contact" className="py-32 bg-deep-matte-charcoal border-t border-off-white-bone/10">
           <div className="max-w-[100rem] mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -555,7 +535,6 @@ export default function HomePage() {
                     </div>
                   </a>
 
-                  {/* ADDED PHONE NUMBER HERE */}
                   <a href="tel:+60137336001" className="flex items-center gap-6 group">
                     <div className="w-16 h-16 rounded-full border border-off-white-bone/20 flex items-center justify-center group-hover:bg-muted-terracotta group-hover:border-muted-terracotta transition-all duration-300">
                       <Phone className="w-6 h-6 text-off-white-bone group-hover:text-deep-matte-charcoal" />
