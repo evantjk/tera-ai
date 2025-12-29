@@ -1,10 +1,10 @@
-// HPI 1.8-V (Visual Update)
+// HPI 1.9-V (Refined Content)
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
-import { ArrowDown, ArrowRight, ExternalLink, Mail, MapPin, Calendar, Phone } from 'lucide-react';
+import { ArrowDown, ArrowRight, ExternalLink, Mail, MapPin, Calendar, Phone, Sparkles, Bot } from 'lucide-react';
 
 // --- Local Types for Hardcoded Data ---
 type CoreService = {
@@ -123,7 +123,7 @@ const ParallaxImage = ({ src, alt, className }: { src: string, alt: string, clas
 
 export default function HomePage() {
   
-  // --- 1. HARDCODED SERVICES DATA (With Official Images) ---
+  // --- 1. HARDCODED SERVICES DATA ---
   const services: CoreService[] = [
     {
       _id: '1',
@@ -131,7 +131,7 @@ export default function HomePage() {
       description: 'Revolutionizes the way you schedule appointments. TERA negotiates times and syncs directly to your calendar for unmatched efficiency.',
       integrationPartner: 'Google Calendar',
       tagline: 'Time Reclaimed',
-      serviceImage: 'https://static.wixstatic.com/media/362827_c666923c320d4ea1b03ba73bc2bca802~mv2.png' // Official Google Calendar graphic
+      serviceImage: 'https://static.wixstatic.com/media/362827_c666923c320d4ea1b03ba73bc2bca802~mv2.png'
     },
     {
       _id: '2',
@@ -139,7 +139,7 @@ export default function HomePage() {
       description: 'Handle payments and financial transactions directly within the chat interface. Secure, borderless, and instant.',
       integrationPartner: 'Wise',
       tagline: 'Borderless Economy',
-      serviceImage: 'https://static.wixstatic.com/media/362827_e4abddc80ceb4cc4988388fbd84bf831~mv2.png' // Official Wise graphic
+      serviceImage: 'https://static.wixstatic.com/media/362827_e4abddc80ceb4cc4988388fbd84bf831~mv2.png'
     },
     {
       _id: '3',
@@ -147,11 +147,11 @@ export default function HomePage() {
       description: 'Make service bookings and navigate logistics without leaving WhatsApp. The "Do-It-All" assistant for your daily needs.',
       integrationPartner: 'Google Maps',
       tagline: 'Logistics Solved',
-      serviceImage: 'https://static.wixstatic.com/media/362827_d090ed83cbd44596b6abc29fcff14d86~mv2.png' // Official Google Maps graphic
+      serviceImage: 'https://static.wixstatic.com/media/362827_d090ed83cbd44596b6abc29fcff14d86~mv2.png'
     }
   ];
 
-  // --- 2. HARDCODED PARTNERS DATA (With Logos) ---
+  // --- 2. HARDCODED PARTNERS DATA ---
   const partners: Partner[] = [
     { 
       _id: '1', 
@@ -270,61 +270,60 @@ export default function HomePage() {
           </div>
 
           <div className="relative z-20 w-full max-w-[120rem] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 flex flex-col gap-6">
+            <div className="lg:col-span-12 flex flex-col items-center text-center gap-8">
+              
               <AnimatedElement delay={200}>
-                <div className="flex items-center gap-4 text-muted-terracotta mb-4">
+                <div className="flex items-center gap-4 text-muted-terracotta mb-4 justify-center">
                   <span className="h-[1px] w-12 bg-muted-terracotta"></span>
                   <span className="uppercase tracking-[0.2em] text-sm font-medium">System Online</span>
+                  <span className="h-[1px] w-12 bg-muted-terracotta"></span>
                 </div>
               </AnimatedElement>
 
               <AnimatedElement delay={400}>
-                <h1 className="text-7xl md:text-8xl lg:text-[9rem] leading-[0.9] font-heading font-black tracking-tighter text-off-white-bone mix-blend-lighten">
-                  THE <br />
-                  <span className="text-stroke">{"TERA"}</span> <br />
-                  ENGINE
+                <h1 className="text-9xl md:text-[10rem] lg:text-[13rem] leading-[0.85] font-heading font-black tracking-tighter text-off-white-bone mix-blend-lighten">
+                  TERA
                 </h1>
               </AnimatedElement>
 
-              <AnimatedElement delay={600} className="max-w-2xl mt-8">
-                <p className="text-xl md:text-2xl text-off-white-bone/80 font-light leading-relaxed border-l-2 border-muted-terracotta pl-6">
+              <AnimatedElement delay={600} className="max-w-3xl mx-auto">
+                <p className="text-xl md:text-2xl text-off-white-bone/80 font-light leading-relaxed">
                   Your WhatsApp AI Personal Assistant. Bridging the gap between complex AI and everyday utility.
                 </p>
               </AnimatedElement>
 
-              <AnimatedElement delay={800} className="mt-12 flex flex-wrap gap-6">
+              {/* UPDATED AI MODEL DISPLAY */}
+              <AnimatedElement delay={700}>
+                <div className="flex flex-wrap justify-center items-center gap-6 mt-4">
+                  <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-off-white-bone/5 border border-off-white-bone/10 backdrop-blur-sm hover:border-muted-terracotta/50 transition-colors group">
+                    <Sparkles className="w-5 h-5 text-muted-terracotta group-hover:scale-110 transition-transform" />
+                    <span className="text-lg font-mono text-off-white-bone font-bold tracking-wide">
+                      v2.5 GEMINI
+                    </span>
+                  </div>
+                  
+                  <div className="h-px w-8 bg-off-white-bone/20 md:h-8 md:w-px" />
+
+                  <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-off-white-bone/5 border border-off-white-bone/10 backdrop-blur-sm hover:border-muted-terracotta/50 transition-colors group">
+                    <Bot className="w-5 h-5 text-muted-terracotta group-hover:scale-110 transition-transform" />
+                    <span className="text-lg font-mono text-off-white-bone font-bold tracking-wide">
+                      v5.0 CHATGPT
+                    </span>
+                  </div>
+                </div>
+              </AnimatedElement>
+
+              <AnimatedElement delay={800} className="mt-8">
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="group relative px-8 py-4 bg-off-white-bone text-deep-matte-charcoal font-bold tracking-wide overflow-hidden"
+                  className="group relative px-10 py-5 bg-off-white-bone text-deep-matte-charcoal font-bold tracking-wide overflow-hidden rounded-sm"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     INITIATE SEQUENCE <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </span>
                   <div className="absolute inset-0 bg-muted-terracotta transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </button>
-                
-                <div className="flex items-center gap-4 text-off-white-bone/50 text-sm font-mono">
-                  <span>v2.5 GEMINI</span>
-                  <span className="w-1 h-1 bg-muted-terracotta rounded-full" />
-                  <span>v5.0 CHATGPT</span>
-                </div>
               </AnimatedElement>
-            </div>
-
-            <div className="hidden lg:col-span-4 lg:flex flex-col justify-end items-end h-full opacity-50">
-               <div className="w-full aspect-[3/4] border border-off-white-bone/10 relative p-4">
-                  <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-muted-terracotta" />
-                  <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-muted-terracotta" />
-                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-muted-terracotta" />
-                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-muted-terracotta" />
-                  
-                  <div className="h-full w-full flex items-center justify-center">
-                    <div className="text-center space-y-2">
-                      <div className="text-6xl font-heading text-muted-terracotta/20">01</div>
-                      <div className="text-xs tracking-widest uppercase">Neural Link Active</div>
-                    </div>
-                  </div>
-               </div>
             </div>
           </div>
 
@@ -364,99 +363,69 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* --- SERVICES SECTION --- */}
+        {/* --- SERVICES SECTION (Redesigned - No Sidebar) --- */}
         <section id="services" className="relative py-32 bg-deep-matte-charcoal">
           <div className="max-w-[120rem] mx-auto px-6 md:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-              
-              <div className="lg:col-span-4 relative">
-                <div className="sticky top-32">
-                  <AnimatedElement direction="right">
-                    <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6 text-off-white-bone">
-                      Core <br />
-                      <span className="text-muted-terracotta">Services</span>
-                    </h2>
-                    <p className="text-lg text-off-white-bone/60 mb-8 leading-relaxed">
-                      Advanced AI capabilities integrated directly into your daily workflow. No apps to install, just natural conversation.
-                    </p>
-                    <div className="hidden lg:block w-24 h-1 bg-off-white-bone/10 mb-8" />
-                    <div className="flex flex-col gap-4 text-sm text-off-white-bone/40 font-mono">
-                      <div className="flex justify-between border-b border-off-white-bone/10 pb-2">
-                        <span>STATUS</span>
-                        <span className="text-green-500">OPERATIONAL</span>
-                      </div>
-                      <div className="flex justify-between border-b border-off-white-bone/10 pb-2">
-                        <span>LATENCY</span>
-                        <span>&lt; 120ms</span>
-                      </div>
-                      <div className="flex justify-between border-b border-off-white-bone/10 pb-2">
-                        <span>ENCRYPTION</span>
-                        <span>AES-256</span>
-                      </div>
-                    </div>
-                  </AnimatedElement>
-                </div>
-              </div>
+            
+            {/* Centered layout for cards since sidebar text was removed */}
+            <div className="max-w-6xl mx-auto flex flex-col gap-24">
+              {services.map((service, index) => (
+                <AnimatedElement key={service._id} delay={index * 100} className="group">
+                  <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-off-white-bone/10 bg-off-white-bone/5 p-8 md:p-12 rounded-sm hover:border-muted-terracotta/50 transition-colors duration-500">
+                    
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
+                    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
+                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
 
-              <div className="lg:col-span-8 flex flex-col gap-24">
-                {services.map((service, index) => (
-                  <AnimatedElement key={service._id} delay={index * 100} className="group">
-                    <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-off-white-bone/10 bg-off-white-bone/5 p-8 md:p-12 rounded-sm hover:border-muted-terracotta/50 transition-colors duration-500">
-                      
-                      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
-                      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
-                      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
-                      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
-
-                      <div className="order-2 md:order-1">
-                        <div className="flex items-center gap-3 mb-4">
-                          <span className="text-xs font-mono text-muted-terracotta px-2 py-1 border border-muted-terracotta/30 rounded">
-                            MODULE 0{index + 1}
+                    <div className="order-2 md:order-1">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="text-xs font-mono text-muted-terracotta px-2 py-1 border border-muted-terracotta/30 rounded">
+                          MODULE 0{index + 1}
+                        </span>
+                        {service.integrationPartner && (
+                          <span className="text-xs text-off-white-bone/40 uppercase tracking-wider">
+                            Via {service.integrationPartner}
                           </span>
-                          {service.integrationPartner && (
-                            <span className="text-xs text-off-white-bone/40 uppercase tracking-wider">
-                              Via {service.integrationPartner}
-                            </span>
-                          )}
+                        )}
+                      </div>
+                      <h3 className="text-3xl font-heading font-bold mb-4 text-off-white-bone group-hover:text-muted-terracotta transition-colors">
+                        {service.serviceName}
+                      </h3>
+                      <p className="text-off-white-bone/70 leading-relaxed mb-6">
+                        {service.description}
+                      </p>
+                      {service.tagline && (
+                        <div className="flex items-center gap-2 text-sm text-off-white-bone/50 italic">
+                          <span className="w-4 h-[1px] bg-muted-terracotta" />
+                          {service.tagline}
                         </div>
-                        <h3 className="text-3xl font-heading font-bold mb-4 text-off-white-bone group-hover:text-muted-terracotta transition-colors">
-                          {service.serviceName}
-                        </h3>
-                        <p className="text-off-white-bone/70 leading-relaxed mb-6">
-                          {service.description}
-                        </p>
-                        {service.tagline && (
-                          <div className="flex items-center gap-2 text-sm text-off-white-bone/50 italic">
-                            <span className="w-4 h-[1px] bg-muted-terracotta" />
-                            {service.tagline}
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="order-1 md:order-2 relative aspect-square md:aspect-[4/3] overflow-hidden rounded-sm">
-                        {service.serviceImage ? (
-                          <Image 
-                            src={service.serviceImage}
-                            alt={service.serviceName || 'Service visualization'}
-                            className="w-full h-full object-contain bg-black/50 grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
-                            width={600}
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-off-white-bone/5 flex items-center justify-center">
-                            <span className="text-off-white-bone/20 text-6xl font-heading">{index + 1}</span>
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-deep-matte-charcoal/80 to-transparent opacity-60" />
-                      </div>
+                      )}
                     </div>
-                  </AnimatedElement>
-                ))}
-              </div>
+
+                    <div className="order-1 md:order-2 relative aspect-square md:aspect-[4/3] overflow-hidden rounded-sm">
+                      {service.serviceImage ? (
+                        <Image 
+                          src={service.serviceImage}
+                          alt={service.serviceName || 'Service visualization'}
+                          className="w-full h-full object-contain bg-black/50 grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
+                          width={600}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-off-white-bone/5 flex items-center justify-center">
+                          <span className="text-off-white-bone/20 text-6xl font-heading">{index + 1}</span>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-deep-matte-charcoal/80 to-transparent opacity-60" />
+                    </div>
+                  </div>
+                </AnimatedElement>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* --- TIMELINE SECTION (Header Updated) --- */}
+        {/* --- TIMELINE SECTION --- */}
         <section id="timeline" className="py-32 bg-deep-matte-charcoal relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03]" 
                style={{ backgroundImage: 'linear-gradient(#E3E3E3 1px, transparent 1px), linear-gradient(90deg, #E3E3E3 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
@@ -464,7 +433,6 @@ export default function HomePage() {
 
           <div className="max-w-[80rem] mx-auto px-6 relative z-10">
             <AnimatedElement className="text-center mb-24">
-              {/* UPDATED HEADER HERE */}
               <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6">Development <span className="text-muted-terracotta">Log</span></h2>
               <p className="text-off-white-bone/60 max-w-2xl mx-auto">Tracing the evolution of the TERA engine from concept to reality.</p>
             </AnimatedElement>
@@ -510,7 +478,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* --- CONTACT SECTION (Removed Visual Breather) --- */}
+        {/* --- CONTACT SECTION --- */}
         <section id="contact" className="py-32 bg-deep-matte-charcoal border-t border-off-white-bone/10">
           <div className="max-w-[100rem] mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">

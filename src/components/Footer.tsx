@@ -1,6 +1,8 @@
+import { ExternalLink } from 'lucide-react';
+
 export default function Footer() {
   return (
-    <footer className="bg-deep-matte-charcoal border-t border-off-white-bone/10">
+    <footer className="bg-deep-matte-charcoal border-t border-off-white-bone/10 relative z-50">
       <div className="max-w-[120rem] mx-auto px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
@@ -15,6 +17,9 @@ export default function Footer() {
             <p className="text-base text-off-white-bone/70 mb-2">
               charles@hellotera.ai
             </p>
+            <p className="text-base text-off-white-bone/70 mb-2">
+              +60 13-733 6001
+            </p>
             <p className="text-base text-off-white-bone/70">
               Petaling Jaya, Selangor
             </p>
@@ -24,20 +29,12 @@ export default function Footer() {
             <h4 className="text-lg font-heading text-off-white-bone mb-4">Follow Us</h4>
             <div className="flex gap-6">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/tera-your-personal-ai-assistant/about/?viewAsMember=true"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base text-off-white-bone/70 hover:text-muted-terracotta transition-colors duration-300"
+                className="flex items-center gap-2 text-base text-off-white-bone/70 hover:text-muted-terracotta transition-colors duration-300"
               >
-                LinkedIn
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-base text-off-white-bone/70 hover:text-muted-terracotta transition-colors duration-300"
-              >
-              Twitter
+                LinkedIn <ExternalLink className="w-3 h-3" />
               </a>
             </div>
           </div>
