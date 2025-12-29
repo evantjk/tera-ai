@@ -494,13 +494,13 @@ export default function HomePage() {
                 </p>
                 
                 <div className="space-y-8">
-                  <a href="mailto:charles@hellotera.ai" className="flex items-center gap-6 group">
+                  <a href="mailto:evan@hellotera.ai" className="flex items-center gap-6 group">
                     <div className="w-16 h-16 rounded-full border border-off-white-bone/20 flex items-center justify-center group-hover:bg-muted-terracotta group-hover:border-muted-terracotta transition-all duration-300">
                       <Mail className="w-6 h-6 text-off-white-bone group-hover:text-deep-matte-charcoal" />
                     </div>
                     <div>
                       <div className="text-sm text-off-white-bone/40 uppercase tracking-wider mb-1">Email Us</div>
-                      <div className="text-2xl font-heading text-off-white-bone group-hover:text-muted-terracotta transition-colors">charles@hellotera.ai</div>
+                      <div className="text-2xl font-heading text-off-white-bone group-hover:text-muted-terracotta transition-colors">evan@hellotera.ai</div>
                     </div>
                   </a>
 
@@ -510,7 +510,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <div className="text-sm text-off-white-bone/40 uppercase tracking-wider mb-1">Direct Line</div>
-                      <div className="text-2xl font-heading text-off-white-bone group-hover:text-muted-terracotta transition-colors">+60 13-733 6001</div>
+                      <div className="text-2xl font-heading text-off-white-bone group-hover:text-muted-terracotta transition-colors">+60 1345678</div>
                     </div>
                   </a>
 
