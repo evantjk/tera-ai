@@ -462,4 +462,79 @@ export default function HomePage() {
                   const isAIFocus = item.milestoneName?.includes('AI Fusion') || item.milestoneName?.includes('Smart Sync');
                   
                   return (
-                    <div key={item._id} className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start ${index % 2 === 0 ? 'md:flex-row-reverse'
+                    <div key={item._id} className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                      
+                      {/* Content Side */}
+                      <div className="md:w-1/2 pl-12 md:pl-0 md:px-16">
+                        <AnimatedElement direction={index % 2 === 0 ? 'left' : 'right'} delay={index * 100}>
+                          <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-start' : 'md:items-end'} md:text-right`}>
+                            <div className={`text-left ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                              <span className={`inline-block px-3 py-1 mb-3 text-xs font-mono border rounded-full ${isAIFocus ? 'text-muted-terracotta border-muted-terracotta/50 bg-muted-terracotta/10' : 'text-muted-terracotta border-muted-terracotta/30 bg-muted-terracotta/5'}`}>
+                                {item.status || 'ARCHIVED'}
+                              </span>
+                              <h3 className={`font-heading font-bold mb-2 text-off-white-bone ${isAIFocus ? 'text-3xl' : 'text-2xl'}`}>{item.milestoneName}</h3>
+                              <div className="flex items-center gap-2 text-off-white-bone/50 text-sm mb-4 md:justify-start justify-start">
+                                <Calendar className="w-4 h-4" />
+                                {item.milestoneDate && new Date(item.milestoneDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                              </div>
+                              <p className={`leading-relaxed ${isAIFocus ? 'text-lg text-off-white-bone' : 'text-off-white-bone/70'}`}>
+                                {item.description}
+                              </p>
+                            </div>
+                          </div>
+                        </AnimatedElement>
+                      </div>
+
+                      {/* Center Node */}
+                      <div className={`absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-deep-matte-charcoal border-2 border-muted-terracotta z-10 mt-1.5 ${isAIFocus ? 'scale-125' : ''}`}>
+                        <div className="absolute inset-0 bg-muted-terracotta rounded-full animate-ping opacity-20" />
+                      </div>
+
+                      {/* Empty Side for Balance */}
+                      <div className="hidden md:block md:w-1/2" />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- VISUAL BREATHER / CTA --- */}
+        <section className="relative h-[70vh] w-full overflow-hidden flex items-center justify-center">
+          <div className="absolute inset-0">
+            <ParallaxImage 
+              src="https://static.wixstatic.com/media/190b6f_e8963e8b1c8f40e08019aa36662cdd99~mv2.png?originWidth=1152&originHeight=640"
+              alt="Abstract background"
+              className="h-full w-full opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-deep-matte-charcoal/40 via-deep-matte-charcoal/60 to-deep-matte-charcoal" />
+          </div>
+
+          <div className="relative z-10 text-center max-w-3xl px-6">
+            <AnimatedElement>
+              <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6 text-off-white-bone">
+                Ready to Experience <span className="text-muted-terracotta">TERA</span>?
+              </h2>
+            </AnimatedElement>
+            <AnimatedElement delay={200}>
+              <p className="text-lg text-off-white-bone/70 mb-8">
+                Join the revolution. Let AI handle what matters, so you can focus on what counts.
+              </p>
+            </AnimatedElement>
+            <AnimatedElement delay={400}>
+              <button className="group relative px-8 py-4 bg-muted-terracotta text-deep-matte-charcoal font-bold tracking-wide overflow-hidden">
+                <span className="relative z-10 flex items-center gap-2 justify-center">
+                  GET STARTED <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </span>
+                <div className="absolute inset-0 bg-off-white-bone transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              </button>
+            </AnimatedElement>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
