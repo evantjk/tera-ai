@@ -197,15 +197,13 @@ export default function HomePage() {
                   className="group relative px-8 py-4 bg-off-white-bone text-deep-matte-charcoal font-bold tracking-wide overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    INITIATE SEQUENCE <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    GET STARTED <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </span>
                   <div className="absolute inset-0 bg-muted-terracotta transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </button>
                 
                 <div className="flex items-center gap-4 text-off-white-bone/50 text-sm font-mono">
-                  <span>v2.5 GEMINI</span>
-                  <span className="w-1 h-1 bg-muted-terracotta rounded-full" />
-                  <span>v5.0 CHATGPT</span>
+                  <span>Powered by Google Gemini 2.5 & ChatGPT 5.0</span>
                 </div>
               </AnimatedElement>
             </div>
@@ -374,7 +372,7 @@ export default function HomePage() {
 
           <div className="max-w-[80rem] mx-auto px-6 relative z-10">
             <AnimatedElement className="text-center mb-24">
-              <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6">Development <span className="text-muted-terracotta">Log</span></h2>
+              <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6"><span className="text-muted-terracotta">TERA</span></h2>
               <p className="text-off-white-bone/60 max-w-2xl mx-auto">Tracing the evolution of the TERA engine from concept to reality.</p>
             </AnimatedElement>
 
@@ -383,39 +381,44 @@ export default function HomePage() {
               <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-off-white-bone/20 md:-translate-x-1/2" />
 
               <div className="space-y-16 md:space-y-24">
-                {timeline.map((item, index) => (
-                  <div key={item._id} className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                    
-                    {/* Content Side */}
-                    <div className="md:w-1/2 pl-12 md:pl-0 md:px-16">
-                      <AnimatedElement direction={index % 2 === 0 ? 'left' : 'right'} delay={index * 100}>
-                        <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-start' : 'md:items-end'} md:text-right`}>
-                          <div className={`text-left ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                            <span className="inline-block px-3 py-1 mb-3 text-xs font-mono text-muted-terracotta border border-muted-terracotta/30 rounded-full bg-muted-terracotta/5">
-                              {item.status || 'ARCHIVED'}
-                            </span>
-                            <h3 className="text-2xl font-heading font-bold mb-2 text-off-white-bone">{item.milestoneName}</h3>
-                            <div className="flex items-center gap-2 text-off-white-bone/50 text-sm mb-4 md:justify-start justify-start">
-                              <Calendar className="w-4 h-4" />
-                              {item.milestoneDate && new Date(item.milestoneDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                {timeline.map((item, index) => {
+                  // Highlight AI integration milestones
+                  const isAIFocus = item.milestoneName?.includes('AI Fusion') || item.milestoneName?.includes('Smart Sync');
+                  
+                  return (
+                    <div key={item._id} className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                      
+                      {/* Content Side */}
+                      <div className="md:w-1/2 pl-12 md:pl-0 md:px-16">
+                        <AnimatedElement direction={index % 2 === 0 ? 'left' : 'right'} delay={index * 100}>
+                          <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-start' : 'md:items-end'} md:text-right`}>
+                            <div className={`text-left ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                              <span className={`inline-block px-3 py-1 mb-3 text-xs font-mono border rounded-full ${isAIFocus ? 'text-muted-terracotta border-muted-terracotta/50 bg-muted-terracotta/10' : 'text-muted-terracotta border-muted-terracotta/30 bg-muted-terracotta/5'}`}>
+                                {item.status || 'ARCHIVED'}
+                              </span>
+                              <h3 className={`font-heading font-bold mb-2 text-off-white-bone ${isAIFocus ? 'text-3xl' : 'text-2xl'}`}>{item.milestoneName}</h3>
+                              <div className="flex items-center gap-2 text-off-white-bone/50 text-sm mb-4 md:justify-start justify-start">
+                                <Calendar className="w-4 h-4" />
+                                {item.milestoneDate && new Date(item.milestoneDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                              </div>
+                              <p className={`leading-relaxed ${isAIFocus ? 'text-lg text-off-white-bone' : 'text-off-white-bone/70'}`}>
+                                {item.description}
+                              </p>
                             </div>
-                            <p className="text-off-white-bone/70 leading-relaxed">
-                              {item.description}
-                            </p>
                           </div>
-                        </div>
-                      </AnimatedElement>
-                    </div>
+                        </AnimatedElement>
+                      </div>
 
-                    {/* Center Node */}
-                    <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-deep-matte-charcoal border-2 border-muted-terracotta z-10 mt-1.5">
-                      <div className="absolute inset-0 bg-muted-terracotta rounded-full animate-ping opacity-20" />
-                    </div>
+                      {/* Center Node */}
+                      <div className={`absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-deep-matte-charcoal border-2 border-muted-terracotta z-10 mt-1.5 ${isAIFocus ? 'scale-125' : ''}`}>
+                        <div className="absolute inset-0 bg-muted-terracotta rounded-full animate-ping opacity-20" />
+                      </div>
 
-                    {/* Empty Side for Balance */}
-                    <div className="hidden md:block md:w-1/2" />
-                  </div>
-                ))}
+                      {/* Empty Side for Balance */}
+                      <div className="hidden md:block md:w-1/2" />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
