@@ -1,12 +1,35 @@
 // HPI 1.6-V
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { BaseCrudService } from '@/integrations';
-import { CoreServices, Partners, Timeline } from '@/entities';
 import { Image } from '@/components/ui/image';
-import { ArrowDown, ArrowRight, ExternalLink, Mail, MapPin, Calendar, CheckCircle2, Circle } from 'lucide-react';
+import { ArrowDown, ArrowRight, ExternalLink, Mail, MapPin, Calendar, Phone } from 'lucide-react';
+
+// --- Types for Hardcoded Data ---
+type CoreService = {
+  _id: string;
+  serviceName: string;
+  description: string;
+  integrationPartner?: string;
+  tagline?: string;
+  serviceImage?: string;
+};
+
+type Partner = {
+  _id: string;
+  partnerName: string;
+  partnerDescription: string;
+  partnerLogo?: string;
+};
+
+type TimelineItem = {
+  _id: string;
+  milestoneName: string;
+  milestoneDate: string;
+  description: string;
+  status: string;
+};
 
 // --- Utility Components for "Living" Experience ---
 
@@ -22,7 +45,7 @@ const FilmGrain = () => (
   </div>
 );
 
-// 2. Intersection Observer Reveal Component (Mandatory Pattern)
+// 2. Intersection Observer Reveal Component
 type AnimatedElementProps = {
   children: React.ReactNode;
   className?: string;
@@ -44,7 +67,6 @@ const AnimatedElement: React.FC<AnimatedElementProps> = ({
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        // Add a small delay via setTimeout if needed, or just let CSS handle transition-delay
         setTimeout(() => {
             element.classList.add('is-visible');
         }, delay);
@@ -103,27 +125,89 @@ const ParallaxImage = ({ src, alt, className }: { src: string, alt: string, clas
 // --- Main Page Component ---
 
 export default function HomePage() {
-  // --- Data Fidelity Protocol: Canonical Data Sources ---
-  const [services, setServices] = useState<CoreServices[]>([]);
-  const [partners, setPartners] = useState<Partners[]>([]);
-  const [timeline, setTimeline] = useState<Timeline[]>([]);
+  
+  // --- HARDCODED DATA (Correct to hellotera.ai) ---
+  
+  const services: CoreService[] = [
+    {
+      _id: '1',
+      serviceName: 'Smart Sync',
+      description: 'Revolutionizes the way you schedule appointments. TERA negotiates times and syncs directly to your calendar for unmatched efficiency.',
+      integrationPartner: 'Google Calendar',
+      tagline: 'Time Reclaimed',
+      serviceImage: 'https://static.wixstatic.com/media/c837a6_7306385d944c4e74823cc19dfa9f77f5~mv2.jpg' // Abstract clock/time visual
+    },
+    {
+      _id: '2',
+      serviceName: 'Financial Fusion',
+      description: 'Handle payments and financial transactions directly within the chat interface. Secure, borderless, and instant.',
+      integrationPartner: 'Wise',
+      tagline: 'Borderless Economy',
+      serviceImage: 'https://static.wixstatic.com/media/c837a6_1482f34237d64344933979858567119e~mv2.jpg' // Abstract lock/security visual
+    },
+    {
+      _id: '3',
+      serviceName: 'Service Bridge',
+      description: 'Make service bookings and navigate logistics without leaving WhatsApp. The "Do-It-All" assistant for your daily needs.',
+      integrationPartner: 'Google Maps',
+      tagline: 'Logistics Solved',
+      serviceImage: 'https://static.wixstatic.com/media/c837a6_3b680c65651c416187974447037f5979~mv2.jpg' // Abstract map/connection visual
+    }
+  ];
 
-  // Preserve original fetching logic
-  useEffect(() => {
-    const fetchData = async () => {
-      const [servicesData, partnersData, timelineData] = await Promise.all([
-        BaseCrudService.getAll<CoreServices>('coreservices'),
-        BaseCrudService.getAll<Partners>('partners'),
-        BaseCrudService.getAll<Timeline>('timeline'),
-      ]);
-      
-      setServices(servicesData.items);
-      setPartners(partnersData.items.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)));
-      setTimeline(timelineData.items.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)));
-    };
+  const partners: Partner[] = [
+    { _id: '1', partnerName: 'NVIDIA Inception', partnerDescription: 'Startup Program' },
+    { _id: '2', partnerName: 'AWS', partnerDescription: 'Cloud Infrastructure' },
+    { _id: '3', partnerName: 'Wise', partnerDescription: 'Payment Integration' },
+    { _id: '4', partnerName: 'Google Maps', partnerDescription: 'Navigation Sync' },
+    { _id: '5', partnerName: 'WhatsApp', partnerDescription: 'Native Platform' }
+  ];
 
-    fetchData();
-  }, []);
+  // Correct Timeline extracted from hellotera.ai
+  const timeline: TimelineItem[] = [
+    { 
+      _id: '1', 
+      milestoneName: 'Ideation', 
+      milestoneDate: '2025-05-01', 
+      description: 'The concept of a WhatsApp-native AI assistant is born.', 
+      status: 'COMPLETED' 
+    },
+    { 
+      _id: '2', 
+      milestoneName: 'Foundation', 
+      milestoneDate: '2025-06-01', 
+      description: 'The core structure was created. Partnership discussions begin.', 
+      status: 'COMPLETED' 
+    },
+    { 
+      _id: '3', 
+      milestoneName: 'Building Blocks', 
+      milestoneDate: '2025-07-01', 
+      description: 'Started development in collaboration with AWS & NVIDIA Inception Program.', 
+      status: 'COMPLETED' 
+    },
+    { 
+      _id: '4', 
+      milestoneName: 'AI Fusion', 
+      milestoneDate: '2025-08-01', 
+      description: 'Integrated with ChatGPT 5.0 and Google Gemini 2.5 models.', 
+      status: 'COMPLETED' 
+    },
+    { 
+      _id: '5', 
+      milestoneName: 'Smart Sync', 
+      milestoneDate: '2025-08-01', 
+      description: 'Integrated with Google Calendar for automated scheduling.', 
+      status: 'COMPLETED' 
+    },
+    { 
+      _id: '6', 
+      milestoneName: 'In Motion', 
+      milestoneDate: '2025-09-01', 
+      description: 'Currently in active use and iteration – gathering feedback and refining features.', 
+      status: 'LIVE' 
+    }
+  ];
 
   // --- Scroll Progress for Global Effects ---
   const { scrollYProgress } = useScroll();
@@ -140,24 +224,20 @@ export default function HomePage() {
           -webkit-text-stroke: 1px rgba(227, 227, 227, 0.2);
           color: transparent;
         }
-        .clip-diagonal {
-          clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        }
-        .clip-chevron {
-          clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
-        }
       `}</style>
       <FilmGrain />
+      
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-muted-terracotta origin-left z-[100]"
         style={{ scaleX }}
       />
+
       <Header />
+
       <main>
         {/* --- HERO SECTION --- */}
         <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
-          {/* Background Parallax Layer */}
           <div className="absolute inset-0 z-0">
              <div className="absolute inset-0 bg-gradient-to-b from-deep-matte-charcoal/80 via-deep-matte-charcoal/40 to-deep-matte-charcoal z-10" />
              <ParallaxImage 
@@ -167,7 +247,6 @@ export default function HomePage() {
              />
           </div>
 
-          {/* Hero Content */}
           <div className="relative z-20 w-full max-w-[120rem] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 flex flex-col gap-6">
               <AnimatedElement delay={200}>
@@ -197,18 +276,20 @@ export default function HomePage() {
                   className="group relative px-8 py-4 bg-off-white-bone text-deep-matte-charcoal font-bold tracking-wide overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    GET STARTED <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    INITIATE SEQUENCE <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </span>
                   <div className="absolute inset-0 bg-muted-terracotta transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </button>
                 
                 <div className="flex items-center gap-4 text-off-white-bone/50 text-sm font-mono">
-                  <span>Powered by Google Gemini 2.5 & ChatGPT 5.0</span>
+                  <span>v2.5 GEMINI</span>
+                  <span className="w-1 h-1 bg-muted-terracotta rounded-full" />
+                  <span>v5.0 CHATGPT</span>
                 </div>
               </AnimatedElement>
             </div>
 
-            {/* Decorative / Abstract Visual Right */}
+            {/* Decorative Visual Right */}
             <div className="hidden lg:col-span-4 lg:flex flex-col justify-end items-end h-full opacity-50">
                <div className="w-full aspect-[3/4] border border-off-white-bone/10 relative p-4">
                   <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-muted-terracotta" />
@@ -226,7 +307,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Scroll Indicator */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -238,7 +318,7 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* --- PARTNERS STRIP (The Ticker) --- */}
+        {/* --- PARTNERS STRIP --- */}
         <section className="py-12 border-y border-off-white-bone/5 bg-deep-matte-charcoal relative z-30">
           <div className="max-w-[120rem] mx-auto px-6">
             <p className="text-center text-sm uppercase tracking-[0.3em] text-off-white-bone/40 mb-8">Trusted Ecosystem Partners</p>
@@ -248,13 +328,12 @@ export default function HomePage() {
                 <div key={partner._id} className="group relative">
                   {partner.partnerLogo ? (
                     <div className="h-12 md:h-16 w-auto relative">
-                       <Image
-                         src={partner.partnerLogo}
-                         alt={partner.partnerName || 'Partner'}
-                         className="h-full w-auto object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
-                         width={200}
-                         focalPointX={68.07228915662651}
-                         focalPointY={74.69879518072288} />
+                       <Image 
+                        src={partner.partnerLogo} 
+                        alt={partner.partnerName} 
+                        className="h-full w-auto object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
+                        width={200}
+                      />
                     </div>
                   ) : (
                     <span className="text-xl font-heading font-bold">{partner.partnerName}</span>
@@ -268,7 +347,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* --- SERVICES SECTION (Sticky Layout) --- */}
+        {/* --- SERVICES SECTION --- */}
         <section id="services" className="relative py-32 bg-deep-matte-charcoal">
           <div className="max-w-[120rem] mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
@@ -308,6 +387,7 @@ export default function HomePage() {
                 {services.map((service, index) => (
                   <AnimatedElement key={service._id} delay={index * 100} className="group">
                     <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-off-white-bone/10 bg-off-white-bone/5 p-8 md:p-12 rounded-sm hover:border-muted-terracotta/50 transition-colors duration-500">
+                      
                       {/* Decorative Corner Accents */}
                       <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
                       <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-off-white-bone/30 group-hover:border-muted-terracotta transition-colors" />
@@ -352,7 +432,6 @@ export default function HomePage() {
                             <span className="text-off-white-bone/20 text-6xl font-heading">{index + 1}</span>
                           </div>
                         )}
-                        {/* Overlay Gradient */}
                         <div className="absolute inset-0 bg-gradient-to-t from-deep-matte-charcoal/80 to-transparent opacity-60" />
                       </div>
                     </div>
@@ -365,7 +444,6 @@ export default function HomePage() {
 
         {/* --- TIMELINE SECTION (Vertical Roadmap) --- */}
         <section id="timeline" className="py-32 bg-deep-matte-charcoal relative overflow-hidden">
-          {/* Background Grid */}
           <div className="absolute inset-0 opacity-[0.03]" 
                style={{ backgroundImage: 'linear-gradient(#E3E3E3 1px, transparent 1px), linear-gradient(90deg, #E3E3E3 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
           />
@@ -377,138 +455,11 @@ export default function HomePage() {
             </AnimatedElement>
 
             <div className="relative">
-              {/* Central Line */}
               <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-off-white-bone/20 md:-translate-x-1/2" />
 
               <div className="space-y-16 md:space-y-24">
                 {timeline.map((item, index) => {
-                  // Highlight AI integration milestones
                   const isAIFocus = item.milestoneName?.includes('AI Fusion') || item.milestoneName?.includes('Smart Sync');
                   
                   return (
-                    <div key={item._id} className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                      
-                      {/* Content Side */}
-                      <div className="md:w-1/2 pl-12 md:pl-0 md:px-16">
-                        <AnimatedElement direction={index % 2 === 0 ? 'left' : 'right'} delay={index * 100}>
-                          <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-start' : 'md:items-end'} md:text-right`}>
-                            <div className={`text-left ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                              <span className={`inline-block px-3 py-1 mb-3 text-xs font-mono border rounded-full ${isAIFocus ? 'text-muted-terracotta border-muted-terracotta/50 bg-muted-terracotta/10' : 'text-muted-terracotta border-muted-terracotta/30 bg-muted-terracotta/5'}`}>
-                                {item.status || 'ARCHIVED'}
-                              </span>
-                              <h3 className={`font-heading font-bold mb-2 text-off-white-bone ${isAIFocus ? 'text-3xl' : 'text-2xl'}`}>{item.milestoneName}</h3>
-                              <div className="flex items-center gap-2 text-off-white-bone/50 text-sm mb-4 md:justify-start justify-start">
-                                <Calendar className="w-4 h-4" />
-                                {item.milestoneDate && new Date(item.milestoneDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                              </div>
-                              <p className={`leading-relaxed ${isAIFocus ? 'text-lg text-off-white-bone' : 'text-off-white-bone/70'}`}>
-                                {item.description}
-                              </p>
-                            </div>
-                          </div>
-                        </AnimatedElement>
-                      </div>
-
-                      {/* Center Node */}
-                      <div className={`absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-deep-matte-charcoal border-2 border-muted-terracotta z-10 mt-1.5 ${isAIFocus ? 'scale-125' : ''}`}>
-                        <div className="absolute inset-0 bg-muted-terracotta rounded-full animate-ping opacity-20" />
-                      </div>
-
-                      {/* Empty Side for Balance */}
-                      <div className="hidden md:block md:w-1/2" />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* --- VISUAL BREATHER / CTA --- */}
-        <section className="relative h-[70vh] w-full overflow-hidden flex items-center justify-center">
-          <div className="absolute inset-0">
-            <ParallaxImage 
-              src="https://static.wixstatic.com/media/190b6f_5d1e218d04b94e93af5a698124d83292~mv2.png?originWidth=1152&originHeight=832"
-              alt="Abstract network visualization"
-              className="w-full h-full opacity-30"
-            />
-            <div className="absolute inset-0 bg-deep-matte-charcoal/60 mix-blend-multiply" />
-          </div>
-          
-          <div className="relative z-10 text-center px-6">
-            <AnimatedElement>
-              <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8 max-w-4xl mx-auto leading-tight">
-                "The future isn't about replacing humans. <br/> It's about <span className="text-muted-terracotta italic">amplifying</span> them."
-              </h2>
-            </AnimatedElement>
-          </div>
-        </section>
-
-        {/* --- CONTACT SECTION --- */}
-        <section id="contact" className="py-32 bg-deep-matte-charcoal border-t border-off-white-bone/10">
-          <div className="max-w-[100rem] mx-auto px-6 md:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-              
-              <AnimatedElement direction="right">
-                <h2 className="text-6xl md:text-8xl font-heading font-black text-off-white-bone mb-8">
-                  LET'S <br />
-                  <span className="text-muted-terracotta">TALK</span>
-                </h2>
-                <p className="text-xl text-off-white-bone/60 max-w-md mb-12">
-                  Ready to deploy the invisible engine? Reach out to discuss integration and partnership opportunities.
-                </p>
-                
-                <div className="space-y-8">
-                  <a href="mailto:charles@hellotera.ai" className="flex items-center gap-6 group">
-                    <div className="w-16 h-16 rounded-full border border-off-white-bone/20 flex items-center justify-center group-hover:bg-muted-terracotta group-hover:border-muted-terracotta transition-all duration-300">
-                      <Mail className="w-6 h-6 text-off-white-bone group-hover:text-deep-matte-charcoal" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-off-white-bone/40 uppercase tracking-wider mb-1">Email Us</div>
-                      <div className="text-2xl font-heading text-off-white-bone group-hover:text-muted-terracotta transition-colors">charles@hellotera.ai</div>
-                    </div>
-                  </a>
-
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-16 h-16 rounded-full border border-off-white-bone/20 flex items-center justify-center group-hover:bg-muted-terracotta group-hover:border-muted-terracotta transition-all duration-300">
-                      <MapPin className="w-6 h-6 text-off-white-bone group-hover:text-deep-matte-charcoal" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-off-white-bone/40 uppercase tracking-wider mb-1">HQ Location</div>
-                      <div className="text-2xl font-heading text-off-white-bone">Petaling Jaya, Selangor</div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedElement>
-
-              <AnimatedElement direction="left" delay={200}>
-                <div className="relative aspect-square md:aspect-[4/5] w-full bg-off-white-bone/5 rounded-sm overflow-hidden border border-off-white-bone/10 p-2">
-                  <div className="absolute inset-0 bg-[url('https://static.wixstatic.com/media/190b6f_48160ec9837342ada0744378cebc0740~mv2.png?originWidth=640&originHeight=768')] bg-cover bg-center opacity-20 grayscale mix-blend-overlay" />
-                  <div className="h-full w-full border border-off-white-bone/10 flex flex-col justify-between p-8 relative z-10">
-                    <div className="flex justify-between items-start">
-                      <div className="w-12 h-12 border-t-2 border-l-2 border-muted-terracotta" />
-                      <ExternalLink className="w-6 h-6 text-off-white-bone/40" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="text-6xl font-heading font-bold text-off-white-bone/10">TERA</div>
-                      <div className="text-sm font-mono text-muted-terracotta">3.1390° N, 101.6869° E</div>
-                    </div>
-                    <div className="flex justify-between items-end">
-                      <div className="text-xs text-off-white-bone/30 max-w-[150px]">
-                        SECURE FACILITY
-                        <br />ACCESS RESTRICTED
-                      </div>
-                      <div className="w-12 h-12 border-b-2 border-r-2 border-muted-terracotta" />
-                    </div>
-                  </div>
-                </div>
-              </AnimatedElement>
-
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
-  );
-}
+                    <div key={item._id} className={`relative flex flex-col md:flex-row gap-8 md:gap-0 items-start ${index % 2 === 0 ? 'md:flex-row-reverse'
