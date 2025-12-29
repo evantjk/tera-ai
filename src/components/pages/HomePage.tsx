@@ -147,17 +147,13 @@ export default function HomePage() {
           clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
         }
       `}</style>
-
       <FilmGrain />
-      
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-muted-terracotta origin-left z-[100]"
         style={{ scaleX }}
       />
-
       <Header />
-
       <main>
         {/* --- HERO SECTION --- */}
         <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
@@ -165,7 +161,7 @@ export default function HomePage() {
           <div className="absolute inset-0 z-0">
              <div className="absolute inset-0 bg-gradient-to-b from-deep-matte-charcoal/80 via-deep-matte-charcoal/40 to-deep-matte-charcoal z-10" />
              <ParallaxImage 
-               src="https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=hero-bg-abstract"
+               src="https://static.wixstatic.com/media/190b6f_e8963e8b1c8f40e08019aa36662cdd99~mv2.png?originWidth=1152&originHeight=640"
                alt="Abstract cinematic texture representing AI neural networks"
                className="h-full w-full opacity-40"
              />
@@ -184,7 +180,7 @@ export default function HomePage() {
               <AnimatedElement delay={400}>
                 <h1 className="text-7xl md:text-8xl lg:text-[9rem] leading-[0.9] font-heading font-black tracking-tighter text-off-white-bone mix-blend-lighten">
                   THE <br />
-                  <span className="text-stroke">INVISIBLE</span> <br />
+                  <span className="text-stroke">{"TERA"}</span> <br />
                   ENGINE
                 </h1>
               </AnimatedElement>
@@ -254,12 +250,13 @@ export default function HomePage() {
                 <div key={partner._id} className="group relative">
                   {partner.partnerLogo ? (
                     <div className="h-12 md:h-16 w-auto relative">
-                       <Image 
-                        src={partner.partnerLogo} 
-                        alt={partner.partnerName || 'Partner'} 
-                        className="h-full w-auto object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
-                        width={200}
-                      />
+                       <Image
+                         src={partner.partnerLogo}
+                         alt={partner.partnerName || 'Partner'}
+                         className="h-full w-auto object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
+                         width={200}
+                         focalPointX={68.07228915662651}
+                         focalPointY={74.69879518072288} />
                     </div>
                   ) : (
                     <span className="text-xl font-heading font-bold">{partner.partnerName}</span>
@@ -428,7 +425,7 @@ export default function HomePage() {
         <section className="relative h-[70vh] w-full overflow-hidden flex items-center justify-center">
           <div className="absolute inset-0">
             <ParallaxImage 
-              src="https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=breather-abstract-network"
+              src="https://static.wixstatic.com/media/190b6f_5d1e218d04b94e93af5a698124d83292~mv2.png?originWidth=1152&originHeight=832"
               alt="Abstract network visualization"
               className="w-full h-full opacity-30"
             />
@@ -483,7 +480,7 @@ export default function HomePage() {
 
               <AnimatedElement direction="left" delay={200}>
                 <div className="relative aspect-square md:aspect-[4/5] w-full bg-off-white-bone/5 rounded-sm overflow-hidden border border-off-white-bone/10 p-2">
-                  <div className="absolute inset-0 bg-[url('https://static.wixstatic.com/media/12d367_71ebdd7141d041e4be3d91d80d4578dd~mv2.png?id=map-texture')] bg-cover bg-center opacity-20 grayscale mix-blend-overlay" />
+                  <div className="absolute inset-0 bg-[url('https://static.wixstatic.com/media/190b6f_48160ec9837342ada0744378cebc0740~mv2.png?originWidth=640&originHeight=768')] bg-cover bg-center opacity-20 grayscale mix-blend-overlay" />
                   <div className="h-full w-full border border-off-white-bone/10 flex flex-col justify-between p-8 relative z-10">
                     <div className="flex justify-between items-start">
                       <div className="w-12 h-12 border-t-2 border-l-2 border-muted-terracotta" />
@@ -508,7 +505,6 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );
